@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Player {
-	List<Card> cards = new ArrayList<Card>();
+	List<Card> cards = new ArrayList<Card>();// g이미 해둠
 	String name;
 	
 	Player(String name) {

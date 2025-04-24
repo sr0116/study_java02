@@ -1,5 +1,9 @@
 package student;
 
+import java.util.Comparator;
+
+
+
 //접근제한자랑 모든 메서드 필드 생성자
 public class Student {
 	//클래스 내에 선언할 위치
@@ -69,7 +73,55 @@ public class Student {
 	public String toString() {
 		return String.format("%5d %5s %5d %5d %5d %6.2f %5d", no, name, kor, eng, mat, avg(), total());
 		}
+	
+	public int compareTo(Student o) {
+		
+		return name.compareTo(o.name);
+		
 	}
+	
+	public static Builder builder() {
+		return new Builder();
+		
+	}
+	 static class Builder{
+		private int no;
+		private String name;
+		private int kor;
+		private int eng;
+		private int mat;
+		
+		Builder no (int no) {
+			this.no = no;
+			return this;
+		}
+		Builder name(String name) {
+	//		this.name = builder.name;
+			return this;
+		}
+		Builder kor(int kor) {
+	//		this.kor = builder.kor;
+			return this;
+		}
+		Student build() {
+			return new Student(this);	
+		}	
+	}
+	
+	private Student(Builder builder) {
+		this.no = builder.no;
+		this.name = builder.name;
+		this.kor = builder.kor;
+		this.eng = builder.eng;
+		this.mat = builder.mat;
+	}
+	
+	
+	public static void main(String[] args) {
+		Student student = Student.builder().no(1).name("새똥이").kor(90).build();// 자기값을 반환시킴
+	}
+	
+}
 
 //⭐️ Getter, Setter 추가?
 	

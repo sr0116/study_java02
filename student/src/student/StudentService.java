@@ -26,10 +26,17 @@ public class StudentService {
 		students.add(new Student(2, "새똥이", randomScore(), randomScore(), randomScore()));
 		students.add(new Student(3, "말똥이", randomScore(), randomScore(), randomScore()));
 		students.add(new Student(4, "소똥이", randomScore(), randomScore(), randomScore()));
-		sortedStudents.addAll(students);// addAll추가// 다른 리스트를 추가하는 형태
+		sortedStudents = new ArrayList<Student>(students);;// addAll추가// 다른 리스트를 추가하는 형태
 		rank();//값이 변하면 호출
 	}// 초기화블럭 //2025 0423 블로그에 생성자 생성으로 사진 찍어둠 , 그걸 더 추런
-
+	public static StudentService studentService = new StudentService();
+	private StudentService () {
+		
+	}
+	public static StudentService getInstance () {
+		return studentService;
+	}
+	
 	public int randomScore() {
 		return (int)(Math.random() * 41 + 60);
 	}
@@ -120,6 +127,7 @@ public class StudentService {
 	//삭제
 	
 	public void remove() {
+		
 		System.out.println("삭제 기능");
 		int no = StudentUtils.nextInt("삭제할 학번 > ");
 		Student s = findBy(no);
@@ -157,24 +165,30 @@ public class StudentService {
 		System.out.printf("수학 평균: %.2f\n"+ avgMat);
 		System.out.printf("전체 평균: %.2f\n"+ avgAll);
 	}
-	
-	public class soltedStudent implements Comparable<Object> {
 
-		@Override
-		public int compareTo(Object o) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
 		
-	}
-	public void rank() { // sort 정
+	public void rank() { // sort 정 리
 		
-		TreeSet<Object> sortedStudents = new TreeSet<>();
+//			1번 방식
+		sortedStudents.sort((s1, s2) -> Integer.compare(s2.total(), s1.total()));
+//		
+//			//List.sort()
+//			
+//			sortedStudents.sort(new Comparator<T>() {
+//				
+//			});
 		
-		Set.of( sortedStudents.size());
-		System.out.println(sortedStudents);
-			
-			
+//		TreeSet<Object> sortedStudents = new TreeSet<>();
+//		
+//		Set.of( sortedStudents.size());
+//		System.out.println(sortedStudents);
+//			
+		
+		//2. treeset()
+		//sortedStudents= new ArrayList<>( new TreeSet<>(sortedStudents));
+		
+		Collections.sort(sortedStudents,(o1,o2)-> o2.total() - o1.total());
+		
 		
 		}
 	}
